@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText, IonDatetime, IonModal, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText, IonDatetime, IonModal, IonSelect, IonSelectOption, IonSpinner } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +21,8 @@ const Register: React.FC = () => {
     codigoSeguridad: ['', '', '', '']
   });
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const securityCodeRefs = useRef<(HTMLIonInputElement | null)[]>([]);
 
   const history = useHistory();
@@ -108,10 +110,17 @@ const Register: React.FC = () => {
   const handleSubmit = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     if (isStepValid()) {
-      console.log('Form submitted:', formData);
-      history.push('/success');
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsSuccess(true);
+      }, 3000);
     }
-  }, [formData, history, isStepValid]);
+  }, [isStepValid]);
+
+  const handleStartUsingAccount = useCallback(() => {
+    history.push('/account');
+  }, [history]);
 
   const renderStep = useMemo(() => {
     const stepContent = [
@@ -258,6 +267,60 @@ const Register: React.FC = () => {
       ),
     ];
 
+    if (isLoading) {
+      return (
+        <motion.div
+          className="loader-container"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5 }}
+        >
+          <IonSpinner name="crescent" />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            Creando tu cuenta...
+          </motion.p>
+        </motion.div>
+      );
+    }
+
+    if (isSuccess) {
+      return (
+        <motion.div
+          className="success-container"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.h2
+            className="success-title"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            {formData.nombre}, estamos listos para que comiences a usar tu cuenta
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <IonButton 
+              expand="block" 
+              className="custom-button" 
+              onClick={handleStartUsingAccount}
+            >
+              Comenzar
+            </IonButton>
+          </motion.div>
+        </motion.div>
+      );
+    }
+
     return (
       <AnimatePresence mode="wait">
         <motion.div
@@ -271,7 +334,7 @@ const Register: React.FC = () => {
         </motion.div>
       </AnimatePresence>
     );
-  }, [step, formData, handleInputChange, handleDateChange, handleSecurityCodeChange, handleSecurityCodeKeyDown, handleSubmit, isStepValid, showDatePicker]);
+  }, [step, formData, handleInputChange, handleDateChange, handleSecurityCodeChange, handleSecurityCodeKeyDown, handleSubmit, isStepValid, showDatePicker, isLoading, isSuccess, handleStartUsingAccount]);
 
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
 
@@ -279,28 +342,40 @@ const Register: React.FC = () => {
     <IonPage className="register-page">
       <IonContent fullscreen>
         {memoizedFloatingLightningBolts}
-        <div className="page-container">
+        <motion.div 
+          className="page-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="header">
             <h1 className="flash-logo">Flash</h1>
           </div>
           <form onSubmit={(e) => e.preventDefault()} className="form-container">
             {renderStep}
           </form>
-          <div className="navigation-buttons">
-            <IonButton fill="clear" className="nav-button prev-button" onClick={prevStep} disabled={step === 1}>
-              {'<'}
-            </IonButton>
-            <div className="step-indicator">{step}/5</div>
-            <IonButton fill="clear" className="nav-button next-button" onClick={nextStep} disabled={step === 5 || !isStepValid()}>
-              {'>'}
-            </IonButton>
-          </div>
-        </div>
+          {!isLoading && !isSuccess && (
+            <motion.div 
+              className="navigation-buttons"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <IonButton fill="clear" className="nav-button prev-button" onClick={prevStep} disabled={step === 1}>
+                {'<'}
+              </IonButton>
+              <div className="step-indicator">{step}/5</div>
+              <IonButton fill="clear" className="nav-button next-button" onClick={nextStep} disabled={step === 5 || !isStepValid()}>
+                {'>'}
+              </IonButton>
+            </motion.div>
+          )}
+        </motion.div>
       </IonContent>
       <IonFooter className="ion-no-border">
-        <IonText className="footer-text">
-          Flash 2024 todos los derechos reservados
-        </IonText>
+          <IonText className="footer-text">
+            Flash 2024 todos los derechos reservados
+          </IonText>
       </IonFooter>
     </IonPage>
   );
