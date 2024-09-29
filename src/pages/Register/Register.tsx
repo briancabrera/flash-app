@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText, IonDatetime, IonModal, IonSelect, IonSelectOption } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
+import { motion, AnimatePresence } from 'framer-motion';
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
 import './Register.scss';
 
@@ -113,151 +114,163 @@ const Register: React.FC = () => {
   }, [formData, history, isStepValid]);
 
   const renderStep = useMemo(() => {
-    switch (step) {
-      case 1:
-        return (
-          <>
-            <h2 className="step-title">¿Cómo te llamás?</h2>
-            <IonInput 
-              name="nombre" 
-              value={formData.nombre} 
-              onIonChange={handleInputChange} 
-              placeholder="Nombre" 
-              className="custom-input" 
-              required
+    const stepContent = [
+      // Step 1
+      (
+        <>
+          <h2 className="step-title">¿Cómo te llamás?</h2>
+          <IonInput 
+            name="nombre" 
+            value={formData.nombre} 
+            onIonChange={handleInputChange} 
+            placeholder="Nombre" 
+            className="custom-input" 
+            required
+          />
+          <IonInput 
+            name="apellido" 
+            value={formData.apellido} 
+            onIonChange={handleInputChange} 
+            placeholder="Apellido" 
+            className="custom-input" 
+            required
+          />
+        </>
+      ),
+      // Step 2
+      (
+        <>
+          <h2 className="step-title">¿Cuántos años tenés?</h2>
+          <p className="step-subtitle">Es necesario ser mayor de edad para usar Flash.</p>
+          <IonButton 
+            expand="block" 
+            className="custom-button date-button" 
+            onClick={() => setShowDatePicker(true)}
+          >
+            {formData.fechaNacimiento || 'Fecha de nacimiento'}
+          </IonButton>
+          <IonModal isOpen={showDatePicker}>
+            <IonDatetime
+              presentation="date"
+              onIonChange={(e) => handleDateChange(e.detail.value)}
             />
-            <IonInput 
-              name="apellido" 
-              value={formData.apellido} 
-              onIonChange={handleInputChange} 
-              placeholder="Apellido" 
-              className="custom-input" 
-              required
-            />
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <h2 className="step-title">¿Cuántos años tenés?</h2>
-            <p className="step-subtitle">Es necesario ser mayor de edad para usar Flash.</p>
-            <IonButton 
-              expand="block" 
-              className="custom-button date-button" 
-              onClick={() => setShowDatePicker(true)}
-            >
-              {formData.fechaNacimiento || 'Fecha de nacimiento'}
-            </IonButton>
-            <IonModal isOpen={showDatePicker}>
-              <IonDatetime
-                presentation="date"
-                onIonChange={(e) => handleDateChange(e.detail.value)}
+          </IonModal>
+        </>
+      ),
+      // Step 3
+      (
+        <>
+          <h2 className="step-title">Un poco sobre vos</h2>
+          <p className="step-subtitle">Estos datos nos van a permitir ayudarte en caso de que tengas problemas con tu cuenta.</p>
+          <IonInput 
+            name="documento" 
+            value={formData.documento} 
+            onIonChange={handleInputChange} 
+            placeholder="Documento" 
+            className="custom-input" 
+            required
+          />
+          <IonInput 
+            name="email" 
+            value={formData.email} 
+            onIonChange={handleInputChange} 
+            placeholder="Email" 
+            type="email"
+            className="custom-input" 
+            required
+          />
+          <IonInput 
+            name="telefono" 
+            value={formData.telefono} 
+            onIonChange={handleInputChange} 
+            placeholder="Teléfono" 
+            type="tel"
+            className="custom-input" 
+            required
+          />
+          <IonSelect 
+            name="pais" 
+            value={formData.pais} 
+            onIonChange={handleInputChange} 
+            className="custom-select"
+            interface="popover"
+          >
+            <IonSelectOption value="uruguay">Uruguay</IonSelectOption>
+            <IonSelectOption value="argentina">Argentina</IonSelectOption>
+          </IonSelect>
+        </>
+      ),
+      // Step 4
+      (
+        <>
+          <h2 className="step-title">Ya falta poco</h2>
+          <p className="step-subtitle">Creá una contraseña. Mínimo de 8 caracteres, usá letras y números.</p>
+          <IonInput 
+            name="contrasena" 
+            value={formData.contrasena} 
+            onIonChange={handleInputChange} 
+            placeholder="Contraseña" 
+            type="password"
+            className="custom-input" 
+            required
+          />
+          <IonInput 
+            name="repiteContrasena" 
+            value={formData.repiteContrasena} 
+            onIonChange={handleInputChange} 
+            placeholder="Repite contraseña" 
+            type="password"
+            className="custom-input" 
+            required
+          />
+        </>
+      ),
+      // Step 5
+      (
+        <>
+          <h2 className="step-title">Por último</h2>
+          <p className="step-subtitle">Creá tu código de seguridad</p>
+          <div className="security-code-container">
+            {formData.codigoSeguridad.map((digit, index) => (
+              <IonInput
+                key={index}
+                ref={el => securityCodeRefs.current[index] = el}
+                value={digit}
+                type="tel"
+                inputmode="numeric"
+                maxlength={1}
+                className="security-code-input"
+                onIonChange={(e) => handleSecurityCodeChange(index, e)}
+                onKeyDown={(e) => handleSecurityCodeKeyDown(index, e)}
+                required
               />
-            </IonModal>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <h2 className="step-title">Un poco sobre vos</h2>
-            <p className="step-subtitle">Estos datos nos van a permitir ayudarte en caso de que tengas problemas con tu cuenta.</p>
-            <IonInput 
-              name="documento" 
-              value={formData.documento} 
-              onIonChange={handleInputChange} 
-              placeholder="Documento" 
-              className="custom-input" 
-              required
-            />
-            <IonInput 
-              name="email" 
-              value={formData.email} 
-              onIonChange={handleInputChange} 
-              placeholder="Email" 
-              type="email"
-              className="custom-input" 
-              required
-            />
-            <IonInput 
-              name="telefono" 
-              value={formData.telefono} 
-              onIonChange={handleInputChange} 
-              placeholder="Teléfono" 
-              type="tel"
-              className="custom-input" 
-              required
-            />
-            <IonSelect 
-              name="pais" 
-              value={formData.pais} 
-              onIonChange={handleInputChange} 
-              className="custom-select"
-              interface="popover"
-            >
-              <IonSelectOption value="uruguay">Uruguay</IonSelectOption>
-              <IonSelectOption value="argentina">Argentina</IonSelectOption>
-            </IonSelect>
-          </>
-        );
-      case 4:
-        return (
-          <>
-            <h2 className="step-title">Ya falta poco</h2>
-            <p className="step-subtitle">Creá una contraseña. Mínimo de 8 caracteres, usá letras y números.</p>
-            <IonInput 
-              name="contrasena" 
-              value={formData.contrasena} 
-              onIonChange={handleInputChange} 
-              placeholder="Contraseña" 
-              type="password"
-              className="custom-input" 
-              required
-            />
-            <IonInput 
-              name="repiteContrasena" 
-              value={formData.repiteContrasena} 
-              onIonChange={handleInputChange} 
-              placeholder="Repite contraseña" 
-              type="password"
-              className="custom-input" 
-              required
-            />
-          </>
-        );
-      case 5:
-        return (
-          <>
-            <h2 className="step-title">Por último</h2>
-            <p className="step-subtitle">Creá tu código de seguridad</p>
-            <div className="security-code-container">
-              {formData.codigoSeguridad.map((digit, index) => (
-                <IonInput
-                  key={index}
-                  ref={el => securityCodeRefs.current[index] = el}
-                  value={digit}
-                  type="tel"
-                  inputmode="numeric"
-                  maxlength={1}
-                  className="security-code-input"
-                  onIonChange={(e) => handleSecurityCodeChange(index, e)}
-                  onKeyDown={(e) => handleSecurityCodeKeyDown(index, e)}
-                  required
-                />
-              ))}
-            </div>
-            <IonButton 
-              expand="block" 
-              className="custom-button" 
-              onClick={handleSubmit}
-              disabled={!isStepValid()}
-            >
-              Finalizar
-            </IonButton>
-          </>
-        );
-      default:
-        return null;
-    }
+            ))}
+          </div>
+          <IonButton 
+            expand="block" 
+            className="custom-button" 
+            onClick={handleSubmit}
+            disabled={!isStepValid()}
+          >
+            Finalizar
+          </IonButton>
+        </>
+      ),
+    ];
+
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={step}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.3 }}
+        >
+          {stepContent[step - 1]}
+        </motion.div>
+      </AnimatePresence>
+    );
   }, [step, formData, handleInputChange, handleDateChange, handleSecurityCodeChange, handleSecurityCodeKeyDown, handleSubmit, isStepValid, showDatePicker]);
 
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
