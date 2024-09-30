@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import Account from './pages/Account/Account';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,6 +24,8 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+import 'swiper/css';
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -37,6 +40,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/register">
           <Register/>
+        </Route>
+        <Route exact path="/account">
+          <Account/>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
