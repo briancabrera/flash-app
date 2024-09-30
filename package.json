@@ -24,6 +24,7 @@
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-transition-group": "^4.4.11",
+    "@types/swiper": "^6.0.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.9.0",
     "ionicons": "^7.0.0",
@@ -31,7 +32,8 @@
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@capacitor/cli": "6.1.2",
