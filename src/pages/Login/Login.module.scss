@@ -1,8 +1,8 @@
-.login-page {
+.loginPage {
   --background: #3880ff;
 }
 
-.content-container {
+.contentContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,20 +11,20 @@
   padding: 0 20px;
 }
 
-.flash-logo {
+.flashLogo {
   font-size: 4rem;
   font-weight: bold;
   color: white;
   margin-bottom: 2rem;
 }
 
-.form-container {
+.formContainer {
   width: 100%;
   max-width: 300px;
   padding-top: 10rem;
 }
 
-.custom-input {
+.customInput {
   margin-bottom: 1rem;
   --background: white;
   --color: #3880ff;
@@ -38,7 +38,7 @@
   font-size: 16px;
 }
 
-.custom-button {
+.customButton {
   margin-top: 1rem;
   --background: white;
   --background-activated: #f4f4f4;
@@ -48,20 +48,20 @@
   font-size: 16px;
 }
 
-.link-container {
+.linkContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 2.5rem;
 }
 
-.login-problem-button, .back-button {
+.loginProblemButton, .backButton {
   --color: white;
   font-size: 14px;
   margin: 0;
 }
 
-.footer-text {
+.footerText {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.8rem;
   text-align: center;
@@ -69,7 +69,7 @@
   padding-bottom: 16px;
 }
 
-ion-footer {
+.footer {
   background: transparent;
   display: flex;
   justify-content: center;

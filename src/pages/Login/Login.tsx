@@ -3,7 +3,7 @@ import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText } from '@i
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion'
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
-import './Login.scss';
+import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
   const history = useHistory();
@@ -33,50 +33,50 @@ const Login: React.FC = () => {
   };
 
   return (
-    <IonPage className="login-page">
+    <IonPage className={styles.loginPage}>
       <IonContent fullscreen>
         <FloatingLightningBolts />
-        <div className="content-container">
-          <h1 className="flash-logo">Flash</h1>
+        <div className={styles.contentContainer}>
+          <h1 className={styles.flashLogo}>Flash</h1>
           <motion.div
-            className="form-container"
+            className={styles.formContainer}
             variants={formVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.div variants={itemVariants}>
               <IonInput 
-                className="custom-input" 
+                className={styles.customInput} 
                 placeholder="Documento" 
               />
             </motion.div>
             <motion.div variants={itemVariants}>
               <IonInput 
-                className="custom-input" 
+                className={styles.customInput} 
                 type="password" 
                 placeholder="Contraseña" 
               />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <IonButton expand="block" className="custom-button">
+              <IonButton expand="block" className={styles.customButton}>
                 Iniciar sesión
               </IonButton>
             </motion.div>
-            <motion.div className="link-container" variants={itemVariants}>
-              <IonButton fill="clear" className="login-problem-button">
+            <motion.div className={styles.linkContainer} variants={itemVariants}>
+              <IonButton fill="clear" className={styles.loginProblemButton}>
                 Problemas para iniciar sesión
               </IonButton>
-              <IonButton fill="clear" className="back-button" onClick={goBack}>
+              <IonButton fill="clear" className={styles.backButton} onClick={goBack}>
                 Volver
               </IonButton>
             </motion.div>
           </motion.div>
         </div>
       </IonContent>
-      <IonFooter className="ion-no-border">
-          <IonText className="footer-text">
-            Flash 2024 todos los derechos reservados
-          </IonText>
+      <IonFooter className={`ion-no-border ${styles.footer}`}>
+        <IonText className={styles.footerText}>
+          Flash 2024 todos los derechos reservados
+        </IonText>
       </IonFooter>
     </IonPage>
   );

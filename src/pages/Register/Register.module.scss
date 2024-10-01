@@ -1,11 +1,11 @@
-.register-page {
+.registerPage {
   --background: #3880ff;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.page-container {
+.pageContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,14 +19,14 @@
   margin-bottom: 20px;
 }
 
-.flash-logo {
+.flashLogo {
   font-size: 4rem;
   font-weight: bold;
   color: white;
   margin: 0;
 }
 
-.form-container {
+.formContainer {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -36,21 +36,21 @@
   margin: 0 auto;
 }
 
-.step-title {
+.stepTitle {
   color: white;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.step-subtitle {
+.stepSubtitle {
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
-.custom-input, .custom-button, .custom-select {
+.customInput, .customButton, .customSelect {
   margin-bottom: 1rem;
   width: 100%;
   --background: white;
@@ -65,14 +65,14 @@
   font-size: 16px;
 }
 
-.date-button {
+.dateButton {
   --background: white;
   --color: #3880ff;
   --border-radius: 8px;
   font-weight: normal;
 }
 
-.custom-select {
+.customSelect {
   --padding-end: 36px;
   position: relative;
 
@@ -84,7 +84,7 @@
   }
 }
 
-.security-code-container {
+.securityCodeContainer {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -92,7 +92,7 @@
   gap: 8px;
 }
 
-.security-code-input {
+.securityCodeInput {
   width: 48px;
   height: 48px;
   --padding-start: 0;
@@ -110,7 +110,7 @@
   }
 }
 
-.navigation-buttons {
+.navigationButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,7 +119,7 @@
   margin: 20px auto 0;
 }
 
-.nav-button {
+.navButton {
   --color: white;
   --background: transparent;
   --background-activated: rgba(255, 255, 255, 0.1);
@@ -129,18 +129,18 @@
   height: 48px;
   margin: 0;
 
-  &.button-disabled {
+  &.buttonDisabled {
     opacity: 0.5;
   }
 }
 
-.step-indicator {
+.stepIndicator {
   color: white;
   font-size: 1rem;
   font-weight: bold;
 }
 
-.footer-text {
+.footerText {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.8rem;
   text-align: center;
@@ -148,34 +148,14 @@
   padding: 11px 0;
 }
 
-ion-footer {
+.footer {
   background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-ion-select::part(text) {
-  color: #3880ff;
-}
-
-ion-select-option {
-  color: #3880ff;
-}
-
-ion-modal {
-  --background: rgba(0, 0, 0, 0.6);
-
-  ion-datetime {
-    --background: white;
-    --color: #3880ff;
-    border-radius: 8px;
-    max-width: 280px;
-    margin: 0 auto;
-  }
-}
-
-.loader-container {
+.loaderContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -195,7 +175,7 @@ ion-modal {
   }
 }
 
-.success-container {
+.successContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,7 +183,7 @@ ion-modal {
   height: 100%;
   text-align: center;
 
-  .success-title {
+  .successTitle {
     color: white;
     font-size: 1.5rem;
     margin-bottom: 2rem;
@@ -211,7 +191,7 @@ ion-modal {
 }
 
 @media screen and (max-height: 600px) {
-  .register-container {
+  .registerContainer {
     justify-content: flex-start;
   }
 
@@ -219,65 +199,63 @@ ion-modal {
     margin-bottom: 10px;
   }
 
-  .flash-logo {
+  .flashLogo {
     font-size: 3rem;
   }
 
-  .form-container {
+  .formContainer {
     justify-content: flex-start;
   }
 
-  .step-title {
+  .stepTitle {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
 
-  .step-subtitle {
+  .stepSubtitle {
     font-size: 0.8rem;
     margin-bottom: 1rem;
   }
 
-  .custom-input, .custom-button, .custom-select {
+  .customInput, .customButton, .customSelect {
     margin-bottom: 0.5rem;
   }
 
-  .navigation-buttons {
+  .navigationButtons {
     margin-top: 10px;
   }
 }
 
 @media screen and (min-height: 601px) {
-  .register-container {
+  .registerContainer {
     justify-content: center;
   }
 }
 
-// Estilos para dispositivos más pequeños (móviles en modo vertical)
 @media screen and (max-width: 360px) {
-  .flash-logo {
+  .flashLogo {
     font-size: 3rem;
   }
 
-  .custom-input, .custom-button, .custom-select {
+  .customInput, .customButton, .customSelect {
     font-size: 14px;
   }
 
-  .security-code-input {
+  .securityCodeInput {
     width: 40px;
     height: 40px;
     font-size: 20px;
   }
 
-  .nav-button {
+  .navButton {
     font-size: 20px;
     width: 40px;
     height: 40px;
   }
 }
 
-// Estilos para asegurar que el contenido sea visible cuando el teclado está abierto
 @media screen and (max-height: 400px) {
-  .register-container {
+  .registerContainer {
     padding-top: 10px;
   }
 
@@ -286,31 +264,31 @@ ion-modal {
     margin-bottom: 5px;
   }
 
-  .flash-logo {
+  .flashLogo {
     font-size: 2.5rem;
   }
 
-  .step-title {
+  .stepTitle {
     font-size: 1rem;
     margin-bottom: 0.3rem;
   }
 
-  .step-subtitle {
+  .stepSubtitle {
     font-size: 0.7rem;
     margin-bottom: 0.5rem;
   }
 
-  .custom-input, .custom-button, .custom-select {
+  .customInput, .customButton, .customSelect {
     margin-bottom: 0.3rem;
     --padding-top: 8px;
     --padding-bottom: 8px;
   }
 
-  .navigation-buttons {
+  .navigationButtons {
     margin-top: 5px;
   }
 
-  .footer-text {
+  .footerText {
     font-size: 0.7rem;
     padding: 5px 0;
   }

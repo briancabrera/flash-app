@@ -1,0 +1,62 @@
+.homePage {
+  background: #3880ff;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.flashLogo {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.buttonContainer {
+  width: 100%;
+  max-width: 300px;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.customButton {
+  margin-bottom: 1rem;
+  --background: white;
+  --background-activated: #f4f4f4;
+  --color: #3880ff;
+  --border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.footerText {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.footer {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}

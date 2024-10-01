@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
-import './Register.scss';
+import styles from './Register.module.scss';
 
 const Register: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -127,13 +127,13 @@ const Register: React.FC = () => {
       // Step 1
       (
         <>
-          <h2 className="step-title">¿Cómo te llamás?</h2>
+          <h2 className={styles.stepTitle}>¿Cómo te llamás?</h2>
           <IonInput 
             name="nombre" 
             value={formData.nombre} 
             onIonChange={handleInputChange} 
             placeholder="Nombre" 
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
           <IonInput 
@@ -141,7 +141,7 @@ const Register: React.FC = () => {
             value={formData.apellido} 
             onIonChange={handleInputChange} 
             placeholder="Apellido" 
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
         </>
@@ -149,11 +149,11 @@ const Register: React.FC = () => {
       // Step 2
       (
         <>
-          <h2 className="step-title">¿Cuántos años tenés?</h2>
-          <p className="step-subtitle">Es necesario ser mayor de edad para usar Flash.</p>
+          <h2 className={styles.stepTitle}>¿Cuántos años tenés?</h2>
+          <p className={styles.stepSubtitle}>Es necesario ser mayor de edad para usar Flash.</p>
           <IonButton 
             expand="block" 
-            className="custom-button date-button" 
+            className={`${styles.customButton} ${styles.dateButton}`} 
             onClick={() => setShowDatePicker(true)}
           >
             {formData.fechaNacimiento || 'Fecha de nacimiento'}
@@ -169,14 +169,14 @@ const Register: React.FC = () => {
       // Step 3
       (
         <>
-          <h2 className="step-title">Un poco sobre vos</h2>
-          <p className="step-subtitle">Estos datos nos van a permitir ayudarte en caso de que tengas problemas con tu cuenta.</p>
+          <h2 className={styles.stepTitle}>Un poco sobre vos</h2>
+          <p className={styles.stepSubtitle}>Estos datos nos van a permitir ayudarte en caso de que tengas problemas con tu cuenta.</p>
           <IonInput 
             name="documento" 
             value={formData.documento} 
             onIonChange={handleInputChange} 
             placeholder="Documento" 
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
           <IonInput 
@@ -185,7 +185,7 @@ const Register: React.FC = () => {
             onIonChange={handleInputChange} 
             placeholder="Email" 
             type="email"
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
           <IonInput 
@@ -194,14 +194,14 @@ const Register: React.FC = () => {
             onIonChange={handleInputChange} 
             placeholder="Teléfono" 
             type="tel"
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
           <IonSelect 
             name="pais" 
             value={formData.pais} 
             onIonChange={handleInputChange} 
-            className="custom-select"
+            className={styles.customSelect}
             interface="popover"
           >
             <IonSelectOption value="uruguay">Uruguay</IonSelectOption>
@@ -212,15 +212,15 @@ const Register: React.FC = () => {
       // Step 4
       (
         <>
-          <h2 className="step-title">Ya falta poco</h2>
-          <p className="step-subtitle">Creá una contraseña. Mínimo de 8 caracteres, usá letras y números.</p>
+          <h2 className={styles.stepTitle}>Ya falta poco</h2>
+          <p className={styles.stepSubtitle}>Creá una contraseña. Mínimo de 8 caracteres, usá letras y números.</p>
           <IonInput 
             name="contrasena" 
             value={formData.contrasena} 
             onIonChange={handleInputChange} 
             placeholder="Contraseña" 
             type="password"
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
           <IonInput 
@@ -229,7 +229,7 @@ const Register: React.FC = () => {
             onIonChange={handleInputChange} 
             placeholder="Repite contraseña" 
             type="password"
-            className="custom-input" 
+            className={styles.customInput} 
             required
           />
         </>
@@ -237,9 +237,9 @@ const Register: React.FC = () => {
       // Step 5
       (
         <>
-          <h2 className="step-title">Por último</h2>
-          <p className="step-subtitle">Creá tu código de seguridad</p>
-          <div className="security-code-container">
+          <h2 className={styles.stepTitle}>Por último</h2>
+          <p className={styles.stepSubtitle}>Creá tu código de seguridad</p>
+          <div className={styles.securityCodeContainer}>
             {formData.codigoSeguridad.map((digit, index) => (
               <IonInput
                 key={index}
@@ -248,7 +248,7 @@ const Register: React.FC = () => {
                 type="tel"
                 inputmode="numeric"
                 maxlength={1}
-                className="security-code-input"
+                className={styles.securityCodeInput}
                 onIonChange={(e) => handleSecurityCodeChange(index, e)}
                 onKeyDown={(e) => handleSecurityCodeKeyDown(index, e)}
                 required
@@ -257,7 +257,7 @@ const Register: React.FC = () => {
           </div>
           <IonButton 
             expand="block" 
-            className="custom-button" 
+            className={styles.customButton} 
             onClick={handleSubmit}
             disabled={!isStepValid()}
           >
@@ -270,7 +270,7 @@ const Register: React.FC = () => {
     if (isLoading) {
       return (
         <motion.div
-          className="loader-container"
+          className={styles.loaderContainer}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
@@ -291,13 +291,13 @@ const Register: React.FC = () => {
     if (isSuccess) {
       return (
         <motion.div
-          className="success-container"
+          className={styles.successContainer}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <motion.h2
-            className="success-title"
+            className={styles.successTitle}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -311,7 +311,7 @@ const Register: React.FC = () => {
           >
             <IonButton 
               expand="block" 
-              className="custom-button" 
+              className={styles.customButton} 
               onClick={handleStartUsingAccount}
             >
               Comenzar
@@ -339,43 +339,43 @@ const Register: React.FC = () => {
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
 
   return (
-    <IonPage className="register-page">
+    <IonPage className={styles.registerPage}>
       <IonContent fullscreen>
         {memoizedFloatingLightningBolts}
         <motion.div 
-          className="page-container"
+          className={styles.pageContainer}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="header">
-            <h1 className="flash-logo">Flash</h1>
+          <div className={styles.header}>
+            <h1 className={styles.flashLogo}>Flash</h1>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className="form-container">
+          <form onSubmit={(e) => e.preventDefault()} className={styles.formContainer}>
             {renderStep}
           </form>
           {!isLoading && !isSuccess && (
             <motion.div 
-              className="navigation-buttons"
+              className={styles.navigationButtons}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <IonButton fill="clear" className="nav-button prev-button" onClick={prevStep} disabled={step === 1}>
+              <IonButton fill="clear" className={`${styles.navButton} ${styles.prevButton}`} onClick={prevStep} disabled={step === 1}>
                 {'<'}
               </IonButton>
-              <div className="step-indicator">{step}/5</div>
-              <IonButton fill="clear" className="nav-button next-button" onClick={nextStep} disabled={step === 5 || !isStepValid()}>
+              <div className={styles.stepIndicator}>{step}/5</div>
+              <IonButton fill="clear" className={`${styles.navButton} ${styles.nextButton}`} onClick={nextStep} disabled={step === 5 || !isStepValid()}>
                 {'>'}
               </IonButton>
             </motion.div>
           )}
         </motion.div>
       </IonContent>
-      <IonFooter className="ion-no-border">
-          <IonText className="footer-text">
-            Flash 2024 todos los derechos reservados
-          </IonText>
+      <IonFooter className={`ion-no-border ${styles.footer}`}>
+        <IonText className={styles.footerText}>
+          Flash 2024 todos los derechos reservados
+        </IonText>
       </IonFooter>
     </IonPage>
   );
