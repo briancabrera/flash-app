@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonCard, IonCardContent, IonText, IonButton, IonIcon, IonMenu, IonList, IonItem } from '@ionic/react';
+import { IonContent, IonPage, IonCard, IonCardContent, IonText, IonButton, IonIcon } from '@ionic/react';
 import { fingerPrintOutline } from 'ionicons/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
@@ -7,6 +7,7 @@ import { useIonViewWillEnter } from '@ionic/react';
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
 import VisaLogo from '../../components/svg/VisaLogo';
 import MastercardLogo from '../../components/svg/MastercardLogo';
+import NavbarMenu from '../../components/functional/NavbarMenu/NavbarMenu';
 import 'swiper/css';
 import styles from './Account.module.scss';
 
@@ -49,84 +50,62 @@ const Account: React.FC = () => {
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
 
   return (
-    <>
-      <IonMenu contentId="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Menu</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonList>
-            <IonItem>Menu Item 1</IonItem>
-            <IonItem>Menu Item 2</IonItem>
-          </IonList>
-        </IonContent>
-      </IonMenu>
-      <IonPage id="main-content" className={styles.accountPage}>
-        <IonHeader className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton></IonMenuButton>
-            </IonButtons>
-            <IonTitle>Flash</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen scrollEvents={true} ref={contentRef}>
-          {memoizedFloatingLightningBolts}
-          <div className={styles.pageContent}>
-            <h1 className={styles.title}>Mis tarjetas</h1>
-            <div className={styles.carouselContainer}>
-              <Swiper
-                onSlideChange={handleSlideChange}
-                spaceBetween={50}
-                slidesPerView={1}
-                centeredSlides={true}
-              >
-                {cards.map((card) => (
-                  <SwiperSlide key={card.id}>
-                    <IonCard className={styles.card}>
-                      <IonCardContent className={styles.cardContent}>
-                        <div className={styles.cardInfo}>
-                          <IonText className={styles.cardName}>{card.name}</IonText>
-                          <IonText className={styles.cardNumber}>Termina en {card.lastDigits}</IonText>
-                        </div>
-                        <div className={styles.cardLogo}>
-                          {card.type === 'VISA' ? (
-                            <VisaLogo width={60} height={20} />
-                          ) : (
-                            <MastercardLogo width={60} height={40} />
-                          )}
-                        </div>
-                      </IonCardContent>
-                    </IonCard>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-            <div className={styles.indicatorContainer}>
-              {cards.map((_, index) => (
-                <div key={index} className={`${styles.indicator} ${index === activeIndex ? styles.active : ''}`} />
+    <IonPage id="main-content">
+      <NavbarMenu isScrolled={isScrolled} />
+      <IonContent fullscreen scrollEvents={true} ref={contentRef} className={styles.accountPage}>
+        {memoizedFloatingLightningBolts}
+        <div className={styles.pageContent}>
+          <h1 className={styles.title}>Mis tarjetas</h1>
+          <div className={styles.carouselContainer}>
+            <Swiper
+              onSlideChange={handleSlideChange}
+              spaceBetween={50}
+              slidesPerView={1}
+              centeredSlides={true}
+            >
+              {cards.map((card) => (
+                <SwiperSlide key={card.id}>
+                  <IonCard className={styles.card}>
+                    <IonCardContent className={styles.cardContent}>
+                      <div className={styles.cardInfo}>
+                        <IonText className={styles.cardName}>{card.name}</IonText>
+                        <IonText className={styles.cardNumber}>Termina en {card.lastDigits}</IonText>
+                      </div>
+                      <div className={styles.cardLogo}>
+                        {card.type === 'VISA' ? (
+                          <VisaLogo width={60} height={20} />
+                        ) : (
+                          <MastercardLogo width={60} height={40} />
+                        )}
+                      </div>
+                    </IonCardContent>
+                  </IonCard>
+                </SwiperSlide>
               ))}
-            </div>
-            <div className={styles.centeredContent}>
-              <div className={styles.fingerprintContainer}>
-                <IonIcon icon={fingerPrintOutline} className={styles.fingerprintIcon} />
-                <IonText className={styles.fingerText}>Asociada a tu dedo {cards[activeIndex].finger}</IonText>
-              </div>
-            </div>
-            <div className={styles.buttonContainer}>
-              <IonButton expand="block" className={styles.customButton}>
-                Administrar mis tarjetas
-              </IonButton>
-              <IonButton expand="block" className={styles.customButton}>
-                Agregar tarjeta
-              </IonButton>
+            </Swiper>
+          </div>
+          <div className={styles.indicatorContainer}>
+            {cards.map((_, index) => (
+              <div key={index} className={`${styles.indicator} ${index === activeIndex ? styles.active : ''}`} />
+            ))}
+          </div>
+          <div className={styles.centeredContent}>
+            <div className={styles.fingerprintContainer}>
+              <IonIcon icon={fingerPrintOutline} className={styles.fingerprintIcon} />
+              <IonText className={styles.fingerText}>Asociada a tu dedo {cards[activeIndex].finger}</IonText>
             </div>
           </div>
-        </IonContent>
-      </IonPage>
-    </>
+          <div className={styles.buttonContainer}>
+            <IonButton expand="block" className={styles.customButton}>
+              Administrar mis tarjetas
+            </IonButton>
+            <IonButton expand="block" className={styles.customButton}>
+              Agregar tarjeta
+            </IonButton>
+          </div>        
+        </div>
+      </IonContent>
+    </IonPage>
   );
 };
 

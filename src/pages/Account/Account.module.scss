@@ -3,21 +3,6 @@
     --ion-text-color: #ffffff;
   }
   
-  .header {
-    transition: background-color 0.3s ease;
-  
-    &.scrolled {
-      ion-toolbar {
-        --background: #3880ff;
-      }
-    }
-  
-    ion-toolbar {
-      --border-width: 0 !important;
-      --border-color: transparent !important;
-    }
-  }
-  
   .pageContent {
     display: flex;
     flex-direction: column;
@@ -43,7 +28,6 @@
     border-radius: 10px;
     height: 200px;
     padding: 20px;
-    color: #000000;
   }
   
   .cardContent {
@@ -57,6 +41,7 @@
   .cardInfo {
     display: flex;
     flex-direction: column;
+    color: #1f2937;
   }
   
   .cardName,
@@ -116,12 +101,13 @@
   }
   
   .fingerprintIcon {
-    font-size: 64px;
-    margin-bottom: 12px;
+    font-size: 72px;
+    margin-bottom: 15px;
+    color: #1f2937;
   }
   
   .fingerText {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     text-align: center;
   }
@@ -130,31 +116,15 @@
     margin-top: auto;
     padding-bottom: 20px;
     width: 100%;
-    max-width: 300px;
+    max-width: 310px;
     margin-left: auto;
     margin-right: auto;
   }
   
   .customButton {
     --background: #ffffff;
-    --color: #3880ff;
+    --color: #1f2937;
     --border-radius: 10px;
+    width: 100%;
     margin-bottom: 10px;
-  }
-  
-  :global {
-    ion-toolbar {
-      --background: transparent;
-      --padding-start: 16px;
-      --padding-end: 16px;
-    }
-  
-    ion-menu-button {
-      --color: #ffffff;
-    }
-  
-    ion-title {
-      color: white;
-      font-weight: bold;
-    }
   }
