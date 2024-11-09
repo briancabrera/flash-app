@@ -1,14 +1,16 @@
 .loginPage {
   --background: #3880ff;
+  height: 100%;
 }
 
 .contentContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  min-height: 100%;
   padding: 0 20px;
+  padding-top: 15vh;
 }
 
 .flashLogo {
@@ -21,7 +23,6 @@
 .formContainer {
   width: 100%;
   max-width: 300px;
-  padding-top: 10rem;
 }
 
 .customInput {
@@ -74,9 +75,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 11px;
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+@media screen and (max-height: 600px) {
+  .contentContainer {
+    padding-top: 10vh;
+  }
+
+  .flashLogo {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .footer {
+    display: none;
+  }
 }

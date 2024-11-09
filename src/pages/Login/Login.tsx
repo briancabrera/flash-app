@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion'
+import { Keyboard } from '@capacitor/keyboard';
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
 import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
   const history = useHistory();
 
+  useEffect(() => {
+    // Configurar el comportamiento del teclado
+    Keyboard.setAccessoryBarVisible({ isVisible: false });
+    Keyboard.setScroll({ isDisabled: true });
+  }, []);
+
   const goBack = () => {
     history.push('/home');
+  };
+
+  const login = () => {
+    history.push('/account');
   };
 
   const formVariants = {
@@ -58,7 +69,7 @@ const Login: React.FC = () => {
               />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <IonButton expand="block" className={styles.customButton}>
+              <IonButton expand="block" className={styles.customButton} onClick={login}>
                 Iniciar sesión
               </IonButton>
             </motion.div>

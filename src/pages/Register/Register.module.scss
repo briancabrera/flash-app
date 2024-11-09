@@ -1,36 +1,42 @@
 .registerPage {
   --background: #3880ff;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-.pageContainer {
+.content {
+  --background: #3880ff;
+  --keyboard-offset: 0px !important;
+  --offset-bottom: 0px !important;
+  --overflow: hidden;
+}
+
+.contentContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  padding: 20px;
-  overflow-y: auto;
+  min-height: 100%;
+  padding: 0 20px;
+  position: relative;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 20px;
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15vh;
+  flex: 1;
 }
 
 .flashLogo {
   font-size: 4rem;
   font-weight: bold;
   color: white;
-  margin: 0;
+  margin-bottom: 2rem;
 }
 
 .formContainer {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
@@ -153,6 +159,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 0;
+  z-index: 2;
 }
 
 .loaderContainer {
@@ -191,20 +203,17 @@
 }
 
 @media screen and (max-height: 600px) {
-  .registerContainer {
-    justify-content: flex-start;
-  }
-
-  .header {
-    margin-bottom: 10px;
+  .mainContent {
+    padding-top: 10vh;
   }
 
   .flashLogo {
     font-size: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   .formContainer {
-    justify-content: flex-start;
+    margin-top: 1rem;
   }
 
   .stepTitle {
@@ -226,9 +235,18 @@
   }
 }
 
-@media screen and (min-height: 601px) {
-  .registerContainer {
-    justify-content: center;
+@media screen and (max-height: 500px) {
+  .mainContent {
+    padding-top: 5vh;
+  }
+
+  .flashLogo {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer {
+    display: none;
   }
 }
 
@@ -255,17 +273,13 @@
 }
 
 @media screen and (max-height: 400px) {
-  .registerContainer {
-    padding-top: 10px;
-  }
-
-  .header {
-    position: static;
-    margin-bottom: 5px;
+  .mainContent {
+    padding-top: 2vh;
   }
 
   .flashLogo {
     font-size: 2.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .stepTitle {

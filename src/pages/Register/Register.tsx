@@ -3,6 +3,7 @@ import { IonContent, IonPage, IonInput, IonButton, IonFooter, IonText, IonDateti
 import { useHistory } from 'react-router-dom';
 import { format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Keyboard } from '@capacitor/keyboard';
 import FloatingLightningBolts from '../../components/ui/FloatingLightningBolts/FloatingLightningBolts';
 import styles from './Register.module.scss';
 
@@ -27,6 +28,10 @@ const Register: React.FC = () => {
 
   const history = useHistory();
 
+  useEffect(() => {
+    Keyboard.setAccessoryBarVisible({ isVisible: false });
+  }, []);
+
   const handleInputChange = useCallback((event: CustomEvent) => {
     const { name, value } = event.target as HTMLIonInputElement;
     setFormData(prevData => ({ ...prevData, [name]: value }));
@@ -44,37 +49,78 @@ const Register: React.FC = () => {
 
   const handleSecurityCodeChange = useCallback((index: number, event: CustomEvent) => {
     const inputElement = event.target as HTMLIonInputElement;
-    const value = inputElement.value;
-
-    if (typeof value === 'string') {
-      const numericValue = value.replace(/[^0-9]/g, '').slice(-1);
+    const value = inputElement.value?.toString() || '';
+  
+    // Si hay más de un dígito (ej. pegando un código completo), procesamos el pegado
+    if (value.length > 1) {
+      const digits = value.replace(/[^0-9]/g, '').split('').slice(0, 4);
       setFormData(prevData => {
-        const newCode = [...prevData.codigoSeguridad];
-        newCode[index] = numericValue;
+        const newCode = [
+          ...digits,
+          ...Array(4 - digits.length).fill('')  // Asegúrate de completar los campos vacíos si es necesario
+        ];
         return { ...prevData, codigoSeguridad: newCode };
       });
-      
-      if (numericValue && index < 3) {
-        setTimeout(() => {
-          securityCodeRefs.current[index + 1]?.setFocus();
-        }, 0);
+  
+      // Enfocar el último input si se pegan 4 dígitos
+      if (digits.length === 4) {
+        securityCodeRefs.current[3]?.setFocus();
+      } else if (digits.length < 4) {
+        securityCodeRefs.current[digits.length]?.setFocus();
       }
+  
+      return;
+    }
+  
+    // Manejo de un solo dígito: lo actualizamos en el estado
+    const numericValue = value.replace(/[^0-9]/g, '');
+    setFormData(prevData => {
+      const newCode = [...prevData.codigoSeguridad];
+      newCode[index] = numericValue;
+      return { ...prevData, codigoSeguridad: newCode };
+    });
+  
+    // Si se ha escrito un valor y no es el último input, mover el foco al siguiente
+    if (numericValue && index < 3) {
+      setTimeout(() => {
+        securityCodeRefs.current[index + 1]?.setFocus();
+      }, 0);
+    }
+  }, []);
+  
+  const handleSecurityCodeKeyDown = useCallback((index: number, event: React.KeyboardEvent) => {
+    if (event.key === 'Backspace') {
+      event.preventDefault();
+      setFormData(prevData => {
+        const newCode = [...prevData.codigoSeguridad];
+        if (newCode[index] === '' && index > 0) {
+          // If current input is empty, clear previous input and move focus back
+          newCode[index - 1] = '';
+          securityCodeRefs.current[index - 1]?.setFocus();
+        } else {
+          // Clear current input
+          newCode[index] = '';
+        }
+        return { ...prevData, codigoSeguridad: newCode };
+      });
+    } else if (event.key === 'ArrowLeft' && index > 0) {
+      securityCodeRefs.current[index - 1]?.setFocus();
+    } else if (event.key === 'ArrowRight' && index < 3) {
+      securityCodeRefs.current[index + 1]?.setFocus();
     }
   }, []);
 
-  const handleSecurityCodeKeyDown = useCallback((index: number, event: React.KeyboardEvent) => {
-    if (event.key === 'Backspace' && formData.codigoSeguridad[index] === '' && index > 0) {
-      setTimeout(() => {
-        securityCodeRefs.current[index - 1]?.setFocus();
-      }, 0);
-    }
-  }, [formData.codigoSeguridad]);
+  const handleSecurityCodeFocus = useCallback((index: number) => {
+    setTimeout(() => {
+      securityCodeRefs.current[index]?.setFocus();
+    }, 0);
+  }, []);
 
   useEffect(() => {
     if (step === 5) {
       securityCodeRefs.current[0]?.setFocus();
     }
-  }, [step]);
+  }, [step]);  
 
   const isStepValid = useCallback(() => {
     switch (step) {
@@ -247,12 +293,13 @@ const Register: React.FC = () => {
                 value={digit}
                 type="tel"
                 inputmode="numeric"
-                maxlength={1}
+                maxlength={1}  // Asegúrate de que solo se pueda ingresar un dígito
                 className={styles.securityCodeInput}
                 onIonChange={(e) => handleSecurityCodeChange(index, e)}
                 onKeyDown={(e) => handleSecurityCodeKeyDown(index, e)}
+                onIonFocus={() => handleSecurityCodeFocus(index)}
                 required
-              />
+              />                 
             ))}
           </div>
           <IonButton 
@@ -334,49 +381,51 @@ const Register: React.FC = () => {
         </motion.div>
       </AnimatePresence>
     );
-  }, [step, formData, handleInputChange, handleDateChange, handleSecurityCodeChange, handleSecurityCodeKeyDown, handleSubmit, isStepValid, showDatePicker, isLoading, isSuccess, handleStartUsingAccount]);
+  }, [step, formData, handleInputChange, handleDateChange, handleSecurityCodeChange, handleSecurityCodeKeyDown, handleSecurityCodeFocus, handleSubmit, isStepValid, showDatePicker, isLoading, isSuccess, handleStartUsingAccount]);
 
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
 
   return (
     <IonPage className={styles.registerPage}>
-      <IonContent fullscreen>
+      <IonContent className={styles.content}>
         {memoizedFloatingLightningBolts}
-        <motion.div 
-          className={styles.pageContainer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className={styles.header}>
+        <div className={styles.contentContainer}>
+          <div className={styles.mainContent}>
             <h1 className={styles.flashLogo}>Flash</h1>
+            <div className={styles.formContainer}>
+              {renderStep}
+            </div>
+            {!isLoading && !isSuccess && (
+              <motion.div 
+                className={styles.navigationButtons}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                <IonButton fill="clear" className={`${styles.navButton} ${styles.prevButton}`}
+                  onClick={prevStep}
+                  disabled={step === 1}
+                >
+                  {'<'}
+                </IonButton>
+                <div className={styles.stepIndicator}>{step}/5</div>
+                <IonButton fill="clear"
+                  className={`${styles.navButton} ${styles.nextButton}`}
+                  onClick={nextStep}
+                  disabled={step === 5 || !isStepValid()}
+                >
+                  {'>'}
+                </IonButton>
+              </motion.div>
+            )}
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className={styles.formContainer}>
-            {renderStep}
-          </form>
-          {!isLoading && !isSuccess && (
-            <motion.div 
-              className={styles.navigationButtons}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <IonButton fill="clear" className={`${styles.navButton} ${styles.prevButton}`} onClick={prevStep} disabled={step === 1}>
-                {'<'}
-              </IonButton>
-              <div className={styles.stepIndicator}>{step}/5</div>
-              <IonButton fill="clear" className={`${styles.navButton} ${styles.nextButton}`} onClick={nextStep} disabled={step === 5 || !isStepValid()}>
-                {'>'}
-              </IonButton>
-            </motion.div>
-          )}
-        </motion.div>
+          <IonFooter className={`ion-no-border ${styles.footer}`}>
+            <IonText className={styles.footerText}>
+              Flash 2024 todos los derechos reservados
+            </IonText>
+          </IonFooter>
+        </div>
       </IonContent>
-      <IonFooter className={`ion-no-border ${styles.footer}`}>
-        <IonText className={styles.footerText}>
-          Flash 2024 todos los derechos reservados
-        </IonText>
-      </IonFooter>
     </IonPage>
   );
 };
