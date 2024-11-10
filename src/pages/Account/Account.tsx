@@ -10,6 +10,7 @@ import MastercardLogo from '../../components/svg/MastercardLogo';
 import NavbarMenu from '../../components/functional/NavbarMenu/NavbarMenu';
 import 'swiper/css';
 import styles from './Account.module.scss';
+import { useHistory } from 'react-router';
 
 const cards = [
   { id: 1, name: 'Débito Santander', lastDigits: '6789', type: 'VISA', finger: 'índice' },
@@ -21,6 +22,12 @@ const Account: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const contentRef = useRef<HTMLIonContentElement | null>(null);
+  const history = useHistory();
+
+  // In your button handler:
+  const handleAddCard = () => {
+    history.push('/scan');
+  };
 
   const handleSlideChange = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
@@ -99,8 +106,8 @@ const Account: React.FC = () => {
             <IonButton expand="block" className={styles.customButton}>
               Administrar mis tarjetas
             </IonButton>
-            <IonButton expand="block" className={styles.customButton}>
-              Agregar tarjeta
+            <IonButton expand="block" className={styles.customButton} onClick={handleAddCard}>
+              Agregar huella
             </IonButton>
           </div>        
         </div>

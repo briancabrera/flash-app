@@ -109,6 +109,6 @@ ion-list {
   }
 }
 
-.logoutItem {
-  margin-top: 20px;
+ion-item[button] {
+  pointer-events: auto !important;
 }

@@ -1,6 +1,28 @@
 import React from 'react';
-import { IonMenu, IonContent, IonList, IonItem, IonIcon, IonLabel, IonButtons, IonMenuButton, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
-import { personOutline, notificationsOutline, cardOutline, timeOutline, lockClosedOutline, settingsOutline, logOutOutline } from 'ionicons/icons';
+import { 
+  IonMenu, 
+  IonContent, 
+  IonList, 
+  IonItem, 
+  IonIcon, 
+  IonLabel, 
+  IonButtons, 
+  IonMenuButton, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle,
+  useIonRouter
+} from '@ionic/react';
+import { 
+  personOutline, 
+  notificationsOutline, 
+  cardOutline, 
+  timeOutline, 
+  lockClosedOutline, 
+  settingsOutline, 
+  logOutOutline 
+} from 'ionicons/icons';
+import { menuController } from '@ionic/core';
 import FloatingLightningBolts from '../../ui/FloatingLightningBolts/FloatingLightningBolts';
 import styles from './NavbarMenu.module.scss';
 
@@ -9,6 +31,18 @@ interface NavbarMenuProps {
 }
 
 const NavbarMenu: React.FC<NavbarMenuProps> = ({ isScrolled }) => {
+  const ionRouter = useIonRouter();
+
+  const handleLogout = async () => {
+    console.log('Logout function called'); // Agregamos este console.log para verificar
+    try {
+      await menuController.close();
+      ionRouter.push('/', 'root');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
   return (
     <>
       <IonMenu contentId="main-content" className={styles.menu} type="overlay">
@@ -45,15 +79,20 @@ const NavbarMenu: React.FC<NavbarMenuProps> = ({ isScrolled }) => {
               <IonLabel>Configuración</IonLabel>
             </IonItem>
             <hr className={styles.menuDivider} />
-            <IonItem button detail={false} className={styles.logoutItem}>
+            <IonItem 
+              button 
+              detail={false} 
+              className={styles.logoutItem}
+              onClick={handleLogout}
+            >
               <IonIcon icon={logOutOutline} slot="start" />
               <IonLabel>Cerrar Sesión</IonLabel>
             </IonItem>
           </IonList>
         </IonContent>
         <footer className={styles.menuFooter}>
-            <p>&copy; 2024 Flash. Todos los derechos reservados.</p>
-          </footer>
+          <p>&copy; 2024 Flash. Todos los derechos reservados.</p>
+        </footer>
       </IonMenu>
       <IonHeader className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <IonToolbar>
