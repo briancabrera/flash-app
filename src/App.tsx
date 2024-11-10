@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Account from './pages/Account/Account';
+import Scan from './pages/Scan/Scan';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,6 +39,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
+        </Route>
+        <Route path="/scan" exact >
+          <Scan/>
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
