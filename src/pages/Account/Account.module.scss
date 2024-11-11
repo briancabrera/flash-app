@@ -114,16 +114,14 @@
 
 .buttonContainer {
   margin-top: auto;
-  padding-bottom: 20px;
   width: 100%;
-  max-width: 310px;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .customButton {
   --background: #ffffff;
-  --color: #1f2937;
+  --color: #2563eb;
   --border-radius: 10px;
   width: 100%;
   margin-bottom: 10px;
