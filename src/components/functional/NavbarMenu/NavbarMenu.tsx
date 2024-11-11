@@ -26,11 +26,7 @@ import { menuController } from '@ionic/core';
 import FloatingLightningBolts from '../../ui/FloatingLightningBolts/FloatingLightningBolts';
 import styles from './NavbarMenu.module.scss';
 
-interface NavbarMenuProps {
-  isScrolled: boolean;
-}
-
-const NavbarMenu: React.FC<NavbarMenuProps> = ({ isScrolled }) => {
+const NavbarMenu: React.FC = () => {
   const ionRouter = useIonRouter();
 
   const handleLogout = async () => {
@@ -94,7 +90,7 @@ const NavbarMenu: React.FC<NavbarMenuProps> = ({ isScrolled }) => {
           <p>&copy; 2024 Flash. Todos los derechos reservados.</p>
         </footer>
       </IonMenu>
-      <IonHeader className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+      <IonHeader className={styles.header}>
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton></IonMenuButton>
