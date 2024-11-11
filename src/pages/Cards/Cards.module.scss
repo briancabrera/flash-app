@@ -1,0 +1,55 @@
+.content {
+  --background: #2563eb;
+  --padding-top: 2rem;
+  --padding-bottom: 2rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.cardItem {
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cardItemContent {
+  --background: #ffffff;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+
+  ion-label {
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+  }
+
+  ion-icon {
+    color: #6b7280;
+    font-size: 1.5rem;
+  }
+}
+
+.addButton {
+  margin: 1rem;
+  --background: #ffffff;
+  --color: #2563eb;
+  --border-radius: 0.5rem;
+  font-weight: 600;
+}
