@@ -1,130 +1,130 @@
 .accountPage {
-    --background: transparent;
-    --ion-text-color: #ffffff;
-  }
-  
-  .pageContent {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    padding: 20px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .carouselContainer {
-    margin-bottom: 20px;
-  }
-  
-  .card {
+  --background: #2563eb;
+  --ion-text-color: #ffffff;
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.carouselContainer {
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 200px;
+  padding: 20px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 5px;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  color: #1f2937;
+}
+
+.cardName,
+.cardNumber {
+  margin-bottom: 10px;
+}
+
+.cardNumber {
+  font-size: 14px;
+}
+
+.cardName {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cardLogo {
+  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 40px;
+}
+
+.indicatorContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+
+  &.active {
     background-color: #ffffff;
-    border-radius: 10px;
-    height: 200px;
-    padding: 20px;
   }
-  
-  .cardContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding: 5px;
-  }
-  
-  .cardInfo {
-    display: flex;
-    flex-direction: column;
-    color: #1f2937;
-  }
-  
-  .cardName,
-  .cardNumber {
-    margin-bottom: 10px;
-  }
-  
-  .cardNumber {
-    font-size: 14px;
-  }
-  
-  .cardName {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .cardLogo {
-    align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    height: 40px;
-  }
-  
-  .indicatorContainer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 0 5px;
-  
-    &.active {
-      background-color: #ffffff;
-    }
-  }
-  
-  .centeredContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .fingerprintContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 15px;
-    padding-bottom: 30px;
-  }
-  
-  .fingerprintIcon {
-    font-size: 72px;
-    margin-bottom: 15px;
-    color: #1f2937;
-  }
-  
-  .fingerText {
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-  }
-  
-  .buttonContainer {
-    margin-top: auto;
-    padding-bottom: 20px;
-    width: 100%;
-    max-width: 310px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .customButton {
-    --background: #ffffff;
-    --color: #1f2937;
-    --border-radius: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-  }
+}
+
+.centeredContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fingerprintContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.fingerprintIcon {
+  font-size: 72px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.fingerText {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.buttonContainer {
+  margin-top: auto;
+  padding-bottom: 20px;
+  width: 100%;
+  max-width: 310px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.customButton {
+  --background: #ffffff;
+  --color: #1f2937;
+  --border-radius: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}

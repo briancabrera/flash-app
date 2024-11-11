@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { IonContent, IonPage, IonCard, IonCardContent, IonText, IonButton, IonIcon } from '@ionic/react';
 import { fingerPrintOutline } from 'ionicons/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,11 +20,9 @@ const cards = [
 
 const Account: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
   const contentRef = useRef<HTMLIonContentElement | null>(null);
   const history = useHistory();
 
-  // In your button handler:
   const handleAddCard = () => {
     history.push('/scan');
   };
@@ -33,33 +31,18 @@ const Account: React.FC = () => {
     setActiveIndex(swiper.activeIndex);
   };
 
-  const handleScroll = (event: CustomEvent) => {
-    const { scrollTop } = event.detail;
-    setIsScrolled(scrollTop > 0);
-  };
-
   useIonViewWillEnter(() => {
     if (contentRef.current) {
       contentRef.current.scrollEvents = true;
     }
   });
 
-  useEffect(() => {
-    const content = contentRef.current;
-    if (content) {
-      content.addEventListener('ionScroll', handleScroll);
-      return () => {
-        content.removeEventListener('ionScroll', handleScroll);
-      };
-    }
-  }, []);
-
   const memoizedFloatingLightningBolts = useMemo(() => <FloatingLightningBolts />, []);
 
   return (
     <IonPage id="main-content">
-      <NavbarMenu isScrolled={isScrolled} />
-      <IonContent fullscreen scrollEvents={true} ref={contentRef} className={styles.accountPage}>
+      <NavbarMenu />
+      <IonContent fullscreen ref={contentRef} className={styles.accountPage}>
         {memoizedFloatingLightningBolts}
         <div className={styles.pageContent}>
           <h1 className={styles.title}>Mis tarjetas</h1>
