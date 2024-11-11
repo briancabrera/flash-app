@@ -23,9 +23,13 @@ const Account: React.FC = () => {
   const contentRef = useRef<HTMLIonContentElement | null>(null);
   const history = useHistory();
 
-  const handleAddCard = () => {
+  const handleAddFingerprint = () => {
     history.push('/scan');
   };
+
+  const handleManageCards = () => {
+    history.push('/cards')
+  }
 
   const handleSlideChange = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
@@ -86,10 +90,10 @@ const Account: React.FC = () => {
             </div>
           </div>
           <div className={styles.buttonContainer}>
-            <IonButton expand="block" className={styles.customButton}>
+            <IonButton expand="block" className={styles.customButton} onClick={handleManageCards}>
               Administrar mis tarjetas
             </IonButton>
-            <IonButton expand="block" className={styles.customButton} onClick={handleAddCard}>
+            <IonButton expand="block" className={styles.customButton} onClick={handleAddFingerprint}>
               Agregar huella
             </IonButton>
           </div>        
