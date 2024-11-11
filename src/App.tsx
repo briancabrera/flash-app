@@ -8,6 +8,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Account from './pages/Account/Account';
 import Scan from './pages/Scan/Scan';
+import Cards from './pages/Cards/Cards';
+import CardDetail from './pages/CardDetail/CardDetail';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,10 +39,16 @@ const App: React.FC = () => (
         <Route exact path="/account">
           <Account/>
         </Route>
+        <Route exact path="/cards">
+          <Cards />
+        </Route>
+        <Route exact path="/card/:id">
+          <CardDetail />
+        </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route path="/scan" exact >
+        <Route exact path="/scan">
           <Scan/>
         </Route>
       </IonRouterOutlet>
