@@ -23,8 +23,8 @@ const Account: React.FC = () => {
   const contentRef = useRef<HTMLIonContentElement | null>(null);
   const history = useHistory();
 
-  const handleAddFingerprint = () => {
-    history.push('/scan');
+  const handleManageFingerprint = () => {
+    history.push('/fingerprints');
   };
 
   const handleManageCards = () => {
@@ -49,7 +49,7 @@ const Account: React.FC = () => {
       <IonContent fullscreen ref={contentRef} className={styles.accountPage}>
         {memoizedFloatingLightningBolts}
         <div className={styles.pageContent}>
-          <h1 className={styles.title}>Mis tarjetas</h1>
+          <h1 className={styles.title}>Mi cuenta</h1>
           <div className={styles.carouselContainer}>
             <Swiper
               onSlideChange={handleSlideChange}
@@ -91,10 +91,10 @@ const Account: React.FC = () => {
           </div>
           <div className={styles.buttonContainer}>
             <IonButton expand="block" className={styles.customButton} onClick={handleManageCards}>
-              Administrar mis tarjetas
+              Mis tarjetas
             </IonButton>
-            <IonButton expand="block" className={styles.customButton} onClick={handleAddFingerprint}>
-              Agregar huella
+            <IonButton expand="block" className={styles.customButton} onClick={handleManageFingerprint}>
+              Mis huellas
             </IonButton>
           </div>        
         </div>
