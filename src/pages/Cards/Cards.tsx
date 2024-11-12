@@ -29,6 +29,10 @@ interface Card {
 
 const Cards: React.FC = () => {
   const history = useHistory();
+
+  const handleBack = () => {
+    history.goBack()
+  }
   
   // Mock data for cards
   const cards: Card[] = [
@@ -66,7 +70,7 @@ const Cards: React.FC = () => {
         <IonToolbar>
           <IonTitle>Flash</IonTitle>
           <IonButtons slot="end">
-            <IonButton className={styles.cancelButton} onClick={() => history.push('/account')}>
+            <IonButton className={styles.cancelButton} onClick={handleBack}>
               <IonIcon className={styles.closeIcon} icon={close} />
             </IonButton>
           </IonButtons>
