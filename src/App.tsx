@@ -20,8 +20,6 @@ import '@ionic/react/css/structure.css';
 import '@ionic/react/css/typography.css';
 
 import 'swiper/css';
-import Fingerprints from './pages/Fingerprints/Fingerprints';
-import FingerprintDetail from './pages/FIngerprintDetail/FingerprintDetail';
 
 setupIonicReact();
 
@@ -47,17 +45,8 @@ const App: React.FC = () => (
         <Route exact path="/card/:id">
           <CardDetail />
         </Route>
-        <Route exact path="/fingerprints">
-          <Fingerprints />
-        </Route>
-        <Route exact path="/fingerprint/:id">
-          <FingerprintDetail />
-        </Route>
         <Route exact path="/">
           <Redirect to="/home" />
-        </Route>
-        <Route exact path="/scan">
-          <Scan/>
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
