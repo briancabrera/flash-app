@@ -421,7 +421,7 @@ const Register: React.FC = () => {
           </div>
           <IonFooter className={`ion-no-border ${styles.footer}`}>
             <IonText className={styles.footerText}>
-              Flash 2024 todos los derechos reservados
+              Flash alpha v0.10.0
             </IonText>
           </IonFooter>
         </div>

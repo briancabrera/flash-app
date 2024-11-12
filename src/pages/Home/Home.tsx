@@ -62,7 +62,7 @@ const Home: React.FC = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           <IonText className={styles.footerText}>
-            Flash 2024 todos los derechos reservados
+            Flash alpha v0.10.0
           </IonText>
         </motion.div>
       </IonFooter>

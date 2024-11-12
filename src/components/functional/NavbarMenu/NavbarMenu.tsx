@@ -87,7 +87,7 @@ const NavbarMenu: React.FC = () => {
           </IonList>
         </IonContent>
         <footer className={styles.menuFooter}>
-          <p>&copy; 2024 Flash. Todos los derechos reservados.</p>
+          <p>Flash alpha v0.10.0</p>
         </footer>
       </IonMenu>
       <IonHeader className={styles.header}>
