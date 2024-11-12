@@ -23,8 +23,8 @@ const Account: React.FC = () => {
   const contentRef = useRef<HTMLIonContentElement | null>(null);
   const history = useHistory();
 
-  const handleManageFingerprint = () => {
-    history.push('/fingerprints');
+  const handlePaymentHistory = () => {
+    history.push('/payment-history');
   };
 
   const handleManageCards = () => {
@@ -93,8 +93,8 @@ const Account: React.FC = () => {
             <IonButton expand="block" className={styles.customButton} onClick={handleManageCards}>
               Mis tarjetas
             </IonButton>
-            <IonButton expand="block" className={styles.customButton} onClick={handleManageFingerprint}>
-              Mis huellas
+            <IonButton expand="block" className={styles.customButton} onClick={handlePaymentHistory}>
+              Historial de pagos
             </IonButton>
           </div>        
         </div>
