@@ -1,0 +1,128 @@
+.header {
+    ion-toolbar {
+      --border-width: 0 !important;
+      --border-color: transparent !important;
+      --background: #3880ff;
+      --padding-top: 1rem;
+      --padding-end: 1rem;
+    }
+  
+    .cancelButton, .backButton {
+      --padding: 12px;
+      --border-radius: 50%;
+      
+      .closeIcon, .backIcon {
+        font-size: 28px;
+        color: white;
+      }
+    }
+  }
+  
+  .content {
+    --background: #2563eb;
+    --padding-top: 2rem;
+    --padding-bottom: 2rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .cardContainer {
+    border-radius: 1rem;
+    height: auto;
+  }
+  
+  .cardList {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .cardItem {
+    --background: transparent;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    height: 80px;
+    display: flex;
+    align-items: flex-start;
+    padding: 0;
+  
+    &:last-child {
+      --border-style: none;
+    }
+  }
+  
+  .itemContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+  
+  .itemHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  
+    span {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+  }
+  
+  .value {
+    font-size: 1.25rem;
+    color: #1f2937;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  
+  .input {
+    --padding-start: 0;
+    --padding-end: 0;
+    font-size: 1.25rem;
+    --placeholder-color: #6b7280;
+  }
+  
+  .toggleButton {
+    margin: 0;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .footer {
+    ion-toolbar {
+      --border-width: 0 !important;
+      --border-color: transparent !important;
+      --background: #3880ff;
+    }
+  
+    .footerButtons {
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+  
+    .footerButton {
+      margin: 0;
+      --background: #ffffff;
+      --color: #2563eb;
+      --border-radius: 0.5rem;
+      font-weight: 600;
+      flex: 1;
+    }
+  }
